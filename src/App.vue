@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <upload-img></upload-img>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import UploadImg from './components/UploadImg'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    UploadImg
   }
 }
 </script>
