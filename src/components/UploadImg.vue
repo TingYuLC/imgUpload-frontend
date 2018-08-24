@@ -123,7 +123,7 @@ export default {
           const height = 1024;
           canvas.width = img.width
           canvas.height = img.height
-          if (img.width > width || img.height > 1024) {
+          if (img.width > width || img.height > height) {
             if (img.width > img.height) {
               canvas.width = 1024
               canvas.height = canvas.width * img.height / img.width
