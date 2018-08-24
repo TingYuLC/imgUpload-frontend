@@ -1,6 +1,12 @@
 <template>
   <div class="upload-img">
-    <div class="img-base">
+    <div class="controller">
+      <button @click="showBase = !showBase">切换1</button>
+      <button @click="showCanvas = !showCanvas">切换2</button>
+      <button @click="showServer = !showServer">切换3</button>
+      <button @click="showStorage = !showStorage">切换4</button>
+    </div>
+    <div class="img-base" v-show="showBase">
       <a class="img-wrap" href="javascript:void(0)">
         <span>数据库存储</span>
         <img :src="uploadImg" />
@@ -15,7 +21,7 @@
         <img ref="imgBase" :src="imgBase" />
       </div>
     </div>
-    <div class="img-canvas">
+    <div class="img-canvas" v-show="showCanvas">
       <a class="img-wrap" href="javascript:void(0)">
         <span>canvas压缩</span>
         <img :src="uploadImg" />
@@ -30,7 +36,7 @@
         <img :src="imgCanvas" />
       </div>
     </div>
-    <div class="img-server">
+    <div class="img-server" v-show="showServer">
       <a class="img-wrap" href="javascript:void(0)">
         <span>服务器存储</span>
         <img :src="uploadImg" />
@@ -42,7 +48,7 @@
         <img :src="imgServer" />
       </div>
     </div>
-    <div class="img-storage">
+    <div class="img-storage" v-show="showStorage">
       <a class="img-wrap" href="javascript:void(0)">
         <span>对象存储</span>
         <img :src="uploadImg" />
@@ -64,14 +70,20 @@ export default {
   data () {
     return {
       uploadImg: uploadImg,
-      imgCanvas: '',
       imgBase: '',
+      imgCanvas: '',
       imgServer: '',
-      imgStorage: ''
+      imgStorage: '',
+      showBase: true,
+      showCanvas: false,
+      showServer: false,
+      showStorage: false
     }
   },
   methods: {
     submitImgBase (e) {
+      const value = e.target.value
+      if (!value) return
       const files = e.target.files[0]
       const reader = new FileReader()
       const that = this
@@ -95,6 +107,8 @@ export default {
       reader.readAsDataURL(files)
     },
     submitImgCanvas (e) {
+      const value = e.target.value
+      if (!value) return
       const files = e.target.files[0]
       const reader = new FileReader()
       const that = this
@@ -105,8 +119,19 @@ export default {
         img.src = base64
         img.onload = function () {
           let canvas = document.createElement('canvas')
-          canvas.width = 1024
-          canvas.height = canvas.width * img.height / img.width
+          const width = 1024;
+          const height = 1024;
+          canvas.width = img.width
+          canvas.height = img.height
+          if (img.width > width || img.height > 1024) {
+            if (img.width > img.height) {
+              canvas.width = 1024
+              canvas.height = canvas.width * img.height / img.width
+            } else {
+              canvas.height = 1024
+              canvas.width = canvas.height * img.width / img.height
+            }
+          }
           let ctx = canvas.getContext('2d')
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
           const base64 = canvas.toDataURL('image/jpeg')
@@ -128,6 +153,8 @@ export default {
       reader.readAsDataURL(files)
     },
     submitImgServer (e) {
+      const value = e.target.value
+      if (!value) return
       const files = e.target.files[0]
       const formData = new FormData()
       formData.append('imgServer', files)
@@ -144,6 +171,8 @@ export default {
         })
     },
     submitImgStorage (e) {
+      const value = e.target.value
+      if (!value) return
       const files = e.target.files[0]
       const formData = new FormData()
       formData.append('imgStorage', files)
@@ -168,12 +197,18 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.upload-img .img-base, .upload-img .img-canvas, .upload-img .img-server, .upload-img .img-storage {
+.upload-img .controller, .upload-img .img-base, .upload-img .img-canvas, .upload-img .img-server, .upload-img .img-storage {
   display: flex;
   flex-direction: row;
   height: 450px;
   align-items: flex-start;
   position: relative;
+}
+.upload-img .controller {
+  height: 50px;
+  margin-bottom: 20px;
+  direction: flex;
+  flex-direction: row;
 }
 .upload-img .img-base p, .upload-img .img-canvas p {
   width: 330px;
@@ -213,8 +248,8 @@ export default {
 .img-base .img img, .img-canvas .img img, .img-server .img img, .img-storage .img img {
   width: 350px;
 }
-.img-canvas button {
-  width: 100px;
+.upload-img button {
+  width: 50px;
   height: 30px;
   text-align: center;
   line-height: 30px;
@@ -223,5 +258,6 @@ export default {
   background: #007AFF;
   cursor: pointer;
   border-radius: 4px;
+  margin-right: 20px;
 }
 </style>
