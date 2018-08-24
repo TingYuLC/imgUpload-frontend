@@ -18,6 +18,7 @@ for (let key in frontendDomain) {
 
 const urlList = {
   demo: {
+    saveImgBase: base + 'saveImgBase',
     saveImgServer: base + 'saveImgServer',
     saveImgStorage: base + 'saveImgStorage'
   }
