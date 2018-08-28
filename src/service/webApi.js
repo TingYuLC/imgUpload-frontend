@@ -6,7 +6,7 @@ const frontendDomain = {
 }
 
 const accessDomain = {
-  dev: 'http://uploadaccess.luojc.cn',
+  dev: 'https://uploadaccess.luojc.cn',
 }
 
 for (let key in frontendDomain) {

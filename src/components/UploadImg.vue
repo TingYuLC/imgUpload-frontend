@@ -93,14 +93,16 @@ export default {
         const obj = {
           base: base64
         }
+        console.log('base64', base64.length)
         service.saveImgBase(obj)
           .then(res => {
             if (res.data.code === 0) {
               that.imgBase = base64
-              console.log('base64', base64.length)
+              that.$refs.formBase.reset()
             }
           })
           .catch(error => {
+            that.$refs.formBase.reset()
             console.log(error)
           })
       }
@@ -135,6 +137,7 @@ export default {
           let ctx = canvas.getContext('2d')
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
           const base64 = canvas.toDataURL('image/jpeg')
+          console.log('canvas', base64.length)
           const obj = {
             base: base64
           }
@@ -142,10 +145,11 @@ export default {
             .then(res => {
               if (res.data.code === 0) {
                 that.imgCanvas = base64
-                console.log('canvas', that.imgCanvas.length)
+                that.$refs.formCanvas.reset()
               }
             })
             .catch(error => {
+              that.$refs.formCanvas.reset()
               console.log(error)
             })
         }
