@@ -6,58 +6,92 @@
       <button @click="showServer = !showServer">切换3</button>
       <button @click="showStorage = !showStorage">切换4</button>
     </div>
-    <div class="img-base" v-show="showBase">
-      <a class="img-wrap" href="javascript:void(0)">
+    <div 
+      v-show="showBase" 
+      class="img-base">
+      <a 
+        class="img-wrap" 
+        href="javascript:void(0)">
         <span>数据库存储</span>
-        <img :src="uploadImg" />
-        <form ref="formBase" class="form">
-          <input type="file" @change="submitImgBase($event)" />
+        <img :src="uploadImg" >
+        <form 
+          ref="formBase" 
+          class="form">
+          <input 
+            type="file" 
+            @change="submitImgBase($event)" >
         </form> 
       </a>
       <div class="base-text">
         <p>{{ imgBase }}</p>
       </div>
       <div class="img">
-        <img ref="imgBase" :src="imgBase" />
+        <img 
+          ref="imgBase" 
+          :src="imgBase" >
       </div>
     </div>
-    <div class="img-canvas" v-show="showCanvas">
-      <a class="img-wrap" href="javascript:void(0)">
+    <div 
+      v-show="showCanvas" 
+      class="img-canvas">
+      <a 
+        class="img-wrap" 
+        href="javascript:void(0)">
         <span>canvas压缩</span>
-        <img :src="uploadImg" />
-        <form ref="formCanvas" class="form">
-          <input type="file" @change="submitImgCanvas($event)" />
+        <img :src="uploadImg" >
+        <form 
+          ref="formCanvas" 
+          class="form">
+          <input 
+            type="file" 
+            @change="submitImgCanvas($event)" >
         </form> 
       </a>
       <div class="base-text">
         <p>{{ imgCanvas }}</p>
       </div>
-      <div ref="imgCanvas" class="img">
-        <img :src="imgCanvas" />
+      <div 
+        ref="imgCanvas" 
+        class="img">
+        <img :src="imgCanvas" >
       </div>
     </div>
-    <div class="img-server" v-show="showServer">
-      <a class="img-wrap" href="javascript:void(0)">
+    <div 
+      v-show="showServer" 
+      class="img-server">
+      <a 
+        class="img-wrap" 
+        href="javascript:void(0)">
         <span>服务器存储</span>
-        <img :src="uploadImg" />
-        <form ref="formServer" class="form">
-          <input type="file" @change="submitImgServer($event)" />
+        <img :src="uploadImg" >
+        <form 
+          ref="formServer" 
+          class="form">
+          <input 
+            type="file" 
+            @change="submitImgServer($event)" >
         </form> 
       </a>
       <div class="img">
-        <img :src="imgServer" />
+        <img :src="imgServer" >
       </div>
     </div>
-    <div class="img-storage" v-show="showStorage">
-      <a class="img-wrap" href="javascript:void(0)">
+    <div 
+      v-show="showStorage" 
+      class="img-storage">
+      <a 
+        class="img-wrap" 
+        href="javascript:void(0)">
         <span>对象存储</span>
-        <img :src="uploadImg" />
+        <img :src="uploadImg" >
         <form ref="formStorage">
-          <input type="file" @change="submitImgStorage($event)" />
+          <input 
+            type="file" 
+            @change="submitImgStorage($event)" >
         </form>
       </a>
       <div class="img">
-        <img :src="imgStorage" />
+        <img :src="imgStorage" >
       </div>
     </div>
   </div>
@@ -66,7 +100,7 @@
 import service from '@/service/uploadImg'
 import uploadImg from '@/assets/upload_box.svg'
 export default {
-  name: 'uploadingImg',
+  name: 'UploadingImg',
   data () {
     return {
       uploadImg: uploadImg,
@@ -120,7 +154,7 @@ export default {
         let img = document.createElement('img')
         img.src = base64
         img.onload = function () {
-          let canvas = document.createElement('canvas')
+            let canvas = document.createElement('canvas')
           const width = 1024;
           const height = 1024;
           canvas.width = img.width

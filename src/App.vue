@@ -1,18 +1,12 @@
 <template>
   <div id="app">
-    <upload-img></upload-img>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-import UploadImg from './components/UploadImg'
-export default {
-  name: 'app',
-  components: {
-    UploadImg
-  }
-}
-</script>
 
 <style>
 #app {
